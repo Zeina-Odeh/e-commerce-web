@@ -1,0 +1,24 @@
+.add-category-container {
+    max-width: 500px;
+    margin: 0 auto;
+    margin-top: 300px;
+    justify-content: center;
+    padding: 20px;
+    border: 1px solid hsl(0, 0%, 88%);
+    border-radius: 6px;
+    background-color: #edeef7;
+  }
+  
+  h2 {
+    text-align: center;
+    color: #333;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  button[kendoButton] {
+    width: 100%;
+  }
+  

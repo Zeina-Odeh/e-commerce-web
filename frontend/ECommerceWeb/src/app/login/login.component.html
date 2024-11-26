@@ -1,0 +1,49 @@
+<form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+    <div>
+      <label for="login" class="login">Login</label>
+    </div>
+    
+    <div> 
+      <label for="email">Email</label>
+      <input
+        kendoTextBox
+        id="email"
+        placeholder="Enter your email"
+        formControlName="email"
+        type="email"
+      />
+      <div *ngIf="loginForm.controls['email'].invalid && isSubmitted" class="error-message">
+        A valid email is required.
+      </div>
+    </div>
+  
+    <div>
+      <label for="password">Password</label>
+      <input
+        kendoTextBox
+        id="password"
+        placeholder="Enter your password"
+        formControlName="password"
+        type="password"
+      />
+      <div *ngIf="loginForm.controls['password'].invalid && isSubmitted" class="error-message">
+        Password is required.
+      </div>
+    </div>
+  
+    <button kendoButton type="submit">Login</button>
+  
+    <!-- <div class="marginContents">
+     <a routerLink="/forgot-password" Forgot Password?></a>
+    </div> -->
+
+    <div class="marginContents">
+      <label>Don't have an account?</label>
+      <a routerLink="/register">Signup</a>
+    </div> 
+  
+    <div *ngIf="errorMessage">
+      {{ errorMessage }}
+    </div>
+  </form>
+  

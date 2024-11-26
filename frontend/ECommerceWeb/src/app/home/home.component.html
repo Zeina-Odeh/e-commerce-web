@@ -1,0 +1,89 @@
+<div class="header">
+  <div class="logo">
+      <!-- <img src="" alt="Logo" class="logo-img"> -->
+      <span>Vogence</span>
+  </div>
+
+  <div class="header-content">
+    <div class="category-dropdown"
+         (mouseenter)="openDropdown('category')" 
+         (mouseleave)="closeDropdown('category')">
+        <span (click)="scrollToCategories()">{{ selectedCategory?.name || 'Category' }}</span>
+        <span class="arrow-icon" (click)="toggleDropdown()" [ngClass]="{'open': dropdownOpen, 'closed': !dropdownOpen}">&#9662;</span>
+        
+        <div *ngIf="dropdownOpen" class="dropdown-menu">
+            <h3>Popular Categories</h3>
+            <div class="category-grid">
+                <div 
+                    *ngFor="let category of categories" 
+                    class="category-item" 
+                    (click)="selectCategory(category)">
+                    <img [src]="getCategoryImage(category)" alt="{{ category.name }}" class="category-image" />
+                    <div class="category-details">
+                        <p class="category-name">{{ category.name }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+
+      <div class="products-link" (click)="toggleProducts()">
+        <span>Products</span>
+      </div>
+
+      <div class="nav-links">
+          <span>News</span>
+          <span>About</span>
+          <span>Support</span>
+      </div>
+  </div>
+
+  <div class="search-box">
+      <input type="text" placeholder="Search Product"/>
+      <mat-icon>search</mat-icon>
+  </div>    
+
+  <div class="account-links">
+      <div class="account-item"
+            (mouseenter)="openDropdown('account')" 
+            (mouseleave)="closeDropdown('account')">
+          <mat-icon>perm_identity</mat-icon>
+          <span *ngIf="isLoggedIn; else loginLink" (click)="toggleAccountDropdown()">
+              {{ username }}
+          </span>
+          <ng-container *ngIf="accountDropdownOpen && isLoggedIn">
+              <div class="account-dropdown">
+                  <a routerLink="/profile">Profile</a>
+                  <ng-container *ngIf="isAdmin">
+                      <a routerLink="/manage/add-category">Add Category</a>
+                      <a routerLink="/manage/add-product">Add Product</a>
+                  </ng-container>
+                  <a (click)="logout()">Logout</a>
+              </div>
+          </ng-container>
+          <ng-template #loginLink>
+              <a routerLink="/login">Account</a>
+          </ng-template>
+      </div>
+
+      <div class="account-item">
+          <mat-icon>shopping_cart</mat-icon>
+          <a routerLink="#">Cart</a>
+      </div>
+  </div>
+</div>
+
+<div class="banner">
+    <div class="banner-content">
+        <h1>Shopping Store</h1>
+        <p>Shopping is a bit of a relaxing hobby for me, which is sometimes troubling for the bank balance.</p>
+        <button class="learn-more-btn">Learn More</button>
+    </div>
+</div>
+
+<div #categorySection class="category-section">
+    <app-category></app-category>
+</div>
+
+
+<app-product-list *ngIf="showProducts"></app-product-list>

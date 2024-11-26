@@ -1,0 +1,44 @@
+<div class="category-content">
+    <p>Shop Our Top Categories</p>
+    <div class="categories">
+      <div 
+        *ngFor="let category of categories" 
+        class="category-block" 
+        (click)="onCategoryClick(category.id, category.name)">
+        <p>{{ category.name }}</p>
+        <img [src]="getCategoryImage(category.name)" alt="{{ category.name }}" /> 
+      </div>
+    </div>
+</div>
+
+<div *ngIf="products.length > 0">
+    <h4 style="padding-top: 50px; padding-left:20px; color: #120629;">
+        {{ selectedCategory }} For You!</h4>
+</div>
+
+<div *ngIf="isLoading" class="loading-spinner">
+  <div class="spinner"></div>
+</div>
+
+<div #productsSection *ngIf="products.length > 0" class="products-section">
+  <div class="products-container">
+    <div class="product-list">
+      <div class="product-item" *ngFor="let product of products">
+        <div class="product-image-block">
+          <span class="favorite-icon">♥️</span>
+          <img class="product-image" [src]="product.imageUrl" alt="{{ product.name }}" loading="lazy"/>
+        </div>
+        <div class="product-details">
+          <p class="product-name">{{ product.name }}</p>
+          <p class="product-price">${{ product.price }}</p>
+          <p class="rating">★★★★★ (1210)</p>
+          <button class="add-to-cart-button" (click)="addToCart(product.id)">Add to Cart</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  
+  
+  

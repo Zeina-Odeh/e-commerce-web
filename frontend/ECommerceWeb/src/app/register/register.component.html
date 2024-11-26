@@ -1,0 +1,100 @@
+<form [formGroup]="registerForm" (ngSubmit)="onRegister()">
+  <div>
+    <label for="registration" class="register">Registration</label>
+  </div>
+  <div> 
+    <label for="userName">Username</label>
+    <input
+      kendoTextBox
+      id="userName"
+      placeholder="Enter your full name"
+      formControlName="userName"
+      type="text"
+    />
+    <div *ngIf="registerForm.controls['userName'].invalid && isSubmitted" class="error-message">
+      Username is required and must be at least 3 characters.
+    </div> 
+  </div>
+
+  <div>
+    <label for="userEmail">Email</label>
+    <input
+      kendoTextBox
+      id="userEmail"
+      placeholder="Enter your email"
+      formControlName="userEmail"
+      type="email"
+    />
+    <div *ngIf="registerForm.controls['userEmail'].invalid && isSubmitted" class="error-message">
+      <span *ngIf="registerForm.controls['userEmail'].errors?.['required']">Email is required.</span>
+      <span *ngIf="registerForm.controls['userEmail'].errors?.['email']">Invalid email format.</span>
+      <span *ngIf="registerForm.controls['userEmail'].errors?.['emailExists']">Email already exists.</span>
+    </div>
+  </div>
+
+  <div>
+    <label for="userPassword">Password</label>
+    <input
+      kendoTextBox
+      id="userPassword"
+      placeholder="Enter your password"
+      formControlName="userPassword"
+      type="password"
+    />
+    <div *ngIf="registerForm.controls['userPassword'].invalid && isSubmitted" class="error-message">
+      Password must be at least 8 characters long, include one uppercase letter, one number, and one special character.
+    </div>
+  </div>
+
+  <div>
+    <label for="confirmPassword">Confirm Password</label>
+    <input kendoTextBox
+        id="confirmPassword"
+        placeholder="Confirm your password"
+        formControlName="confirmPassword"
+        type="password" 
+      />
+    <div *ngIf="registerForm.hasError('mismatch') && isSubmitted" class="error-message">
+      Passwords do not match.
+    </div>
+  </div>
+
+  <div>
+    <label for="userPhoneNumber">Phone Number</label>
+    <input
+      kendoTextBox
+      id="userPhoneNumber"
+      placeholder="Enter your phone number"
+      formControlName="userPhoneNumber"
+      type="text"
+    />
+    <div *ngIf="registerForm.controls['userPhoneNumber'].invalid && isSubmitted" class="error-message">
+      a valid phone number is must.
+    </div>
+  </div>
+
+  <div>
+    <label for="userAddress">Address</label>
+    <input
+      kendoTextBox
+      id="userAddress"
+      placeholder="Enter your address"
+      formControlName="userAddress"
+      type="text"
+    />
+    <div *ngIf="registerForm.controls['userAddress'].invalid && isSubmitted" class="error-message">
+      Enter an address.
+    </div>
+  </div>
+
+  <button kendoButton type="submit">Register</button>
+
+  <div class="marginContents">
+    <label>Already have an account?</label>
+    <a routerLink="/login">Sign in</a> 
+  </div> 
+
+  <div *ngIf="errorMessage">
+    {{ errorMessage }}
+  </div>
+</form>

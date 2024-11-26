@@ -1,0 +1,46 @@
+<div class="add-category-container">
+  <h2>Add New Category</h2>
+  <form [formGroup]="addCategoryForm" (ngSubmit)="addCategory()" class="add-category-form">
+    <div class="form-group">
+      <label for="categoryName">Category Name:</label>
+      <input
+        kendo-textbox
+        formControlName="name" 
+        id="categoryName"
+        required
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="categoryImage">Category Image: </label>
+      <input type="file" (change)="onFileSelected($event)" required />
+    </div>
+  
+    <div *ngIf="imagePreview">
+      <img [src]="imagePreview" alt="Selected Image" style="max-width: 100px; max-height: 100px;" />
+    </div>
+
+    <button kendoButton type="submit" [disabled]="addCategoryForm.invalid">
+      Add Category
+    </button>
+<!-- 
+    <input type="text" class="form-control" id="name"
+     placeholder="image name" formControlName="imageName" name="name" />
+
+    <input type="button" (click)="getImage()" value="Get Image"> -->
+
+    <!-- <div *ngIf=retrievedImage>
+      <img [src]="retrievedImage">
+    </div> -->
+
+  </form>
+
+
+  <kendo-notification *ngIf="successMessage" [type]="{ style: 'success', icon: true }" (hide)="clearMessages()">
+    {{ successMessage }}
+  </kendo-notification>
+
+  <kendo-notification *ngIf="errorMessage" [type]="{ style: 'error', icon: true }" (hide)="clearMessages()">
+    {{ errorMessage }}
+  </kendo-notification>
+</div>
